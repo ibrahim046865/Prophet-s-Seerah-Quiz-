@@ -170,6 +170,8 @@ const questions = [
   }
 ];
 
+const correctSound = new Audio('sounds/sahih.mp3');
+const wrongSound = new Audio('sounds/qata.mp3');
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -213,12 +215,14 @@ function getQuestions() {
       if (button.value === questions[currentIndex].answer) {
         button.classList.add('green');
         button.innerHTML = `${button.value} <span>&#10004;</span> `;
+        correctSound.play();
         totalScore++;
         scoreDisplay.textContent = `${toArabicNumbers(totalScore)} / ${toArabicNumbers(questions.length)}`;
       }
       else if (button.value !== questions[currentIndex].answer) {
         button.classList.add('red');
         button.innerHTML = `${button.value} <span>&#10008;</span> `;
+        wrongSound.play();
         Array.from(answerButtonsElement.children).forEach(btn => {
           if (btn.value === questions[currentIndex].answer) {
             btn.classList.add('green');
